@@ -1,7 +1,9 @@
 package com.ahiru.grillecrypt.service;
 
 import java.util.List;
+import java.util.Random;
 
+import org.apache.naming.StringManager;
 import org.springframework.stereotype.Service;
 
 import com.ahiru.grillecrypt.model.Index;
@@ -32,6 +34,22 @@ public class GrilleCrypt {
 	}
 	
 	public String encrypt(String message) {
-		return null;
+		StringBuilder encrypted = new StringBuilder();
+		StringBuilder stringMessage = new StringBuilder(message);
+		Random random = new Random();
+		int countElementsInBlock = this.mask.getSize() * this.mask.getSize();
+		while(stringMessage.length() % countElementsInBlock > 0) {
+			stringMessage.append((char) ('a' + random.nextInt(26)));
+		}
+		int countOfBlocks = stringMessage.length() / countElementsInBlock;
+		
+		for(int i = 0; i < countOfBlocks; i++) {
+			System.err.println("substring = " + stringMessage.substring(i * countElementsInBlock, (i + 1) * countElementsInBlock));
+			encrypted.append(
+					this.mask.encryptBlock(
+							stringMessage.substring(i * countElementsInBlock, (i + 1) * countElementsInBlock)));
+		}
+		
+		return encrypted.toString();
 	}
 }
