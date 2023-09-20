@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class Mask {
@@ -16,11 +17,6 @@ public class Mask {
 		super();
 		this.mask = new HashSet<Index>();
 		this.size = size;
-	}
-
-	@Deprecated
-	public Set<Index> getMask() {
-		return mask;
 	}
 
 	public Integer getSize() {
@@ -75,7 +71,29 @@ public class Mask {
 		} else {
 			return true;
 		}
-		
+	}
+	
+	public List<Index> getFreeIndexes() {
+		List<Index> freeIndexes = new ArrayList<Index>();
+		for(int i = 0; i < this.size; i++) {
+			for(int j = 0; j < this.size; j++) {
+				if(this.isFree(i, j)) {
+					freeIndexes.add(new Index(i, j));
+				}
+			}
+		}
+		return freeIndexes;
+	}
+	
+	public void generateRandomMask() {
+		List<Index> freeIndexes = this.getFreeIndexes();
+		while(!freeIndexes.isEmpty()) {
+			Random random = new Random();
+			int in = random.nextInt(freeIndexes.size());
+			System.err.println(in);
+			this.mask.add(freeIndexes.get(in));
+			freeIndexes = this.getFreeIndexes();
+		}
 	}
 	
 	private List<Index> normalMask() {

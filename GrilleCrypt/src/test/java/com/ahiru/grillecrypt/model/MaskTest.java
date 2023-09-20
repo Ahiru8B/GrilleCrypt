@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +16,6 @@ class MaskTest {
 		this.mask = new Mask(2);
 	}
 
-	@Test
-	void addTest() {
-		this.mask.add(0, 0);
-		assertEquals(2, this.mask.getSize());
-		assertTrue(this.mask.getMask().contains(new Index(0, 0)));
-	}
-	
 	@Test
 	void decryptBlockTest() {
 		this.mask.add(0, 0);
@@ -54,6 +45,11 @@ class MaskTest {
 		assertFalse(this.mask.isFree(1, 1));
 	}
 	
-
+	@Test
+	void getFreeIndexesTest() {
+		assertTrue(this.mask.getFreeIndexes().size() == 4);
+		this.mask.add(0, 0);
+		assertTrue(this.mask.getFreeIndexes().size() == 0);
+	}
 
 }
