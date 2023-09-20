@@ -26,4 +26,12 @@ class GrilleCryptTest {
 		assertEquals(decrypt, this.grileCrypt.encrypt(encrypt));
 	}
 	
+	@Test
+	void decryptTest() {
+		String encrypt = "abcd";
+		String decrypt = "abdc";
+		this.grileCrypt.addElementInMask(0, 0);
+		assertEquals(encrypt, this.grileCrypt.decrypt(decrypt));	
+	}
+	
 }
