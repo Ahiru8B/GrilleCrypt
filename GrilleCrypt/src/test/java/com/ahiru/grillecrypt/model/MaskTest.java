@@ -1,6 +1,7 @@
 package com.ahiru.grillecrypt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -38,6 +39,19 @@ class MaskTest {
 		String decryptedBlock = "abdc";
 		String ecnryptedBlock = "abcd";
 		assertEquals(ecnryptedBlock, this.mask.encryptBlock(decryptedBlock));
+	}
+	
+	@Test
+	void isFreeTest() {
+		assertTrue(this.mask.isFree(0, 0));
+		assertTrue(this.mask.isFree(0, 1));
+		assertTrue(this.mask.isFree(1, 0));
+		assertTrue(this.mask.isFree(1, 1));
+		this.mask.add(0, 0);
+		assertFalse(this.mask.isFree(0, 0));
+		assertFalse(this.mask.isFree(0, 1));
+		assertFalse(this.mask.isFree(1, 0));
+		assertFalse(this.mask.isFree(1, 1));
 	}
 	
 

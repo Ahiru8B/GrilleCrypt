@@ -65,6 +65,19 @@ public class Mask {
 		return decode.toString();
 	}
 	
+	public boolean isFree(int row, int column) {
+		Index testIndex = new Index(row, column);
+		if(this.normalMask().contains(testIndex)
+				|| this.maskRotated90degrees(this.mask.iterator()).contains(testIndex)
+				|| this.maskRotated180degrees(this.mask.iterator()).contains(testIndex)
+				|| this.maskRotated270degrees(this.mask.iterator()).contains(testIndex)) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+	
 	private List<Index> normalMask() {
 		List<Index> mask = new ArrayList<Index>(this.mask);
 		return mask;
