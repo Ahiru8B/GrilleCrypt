@@ -11,12 +11,6 @@ public class BlockOfText {
 		this.blockOfText = new HashMap<Integer, Map<Integer,Character>>();
 	}
 	
-	
-	@Deprecated
-	public Map<Integer, Map<Integer, Character>> getBlockOfText() {
-		return blockOfText;
-	}
-
 	public void addLetter(int row, int column, char letter) {
 		if(!this.blockOfText.containsKey(row)) {
 			this.blockOfText.put(row, new HashMap<Integer, Character>());
@@ -27,6 +21,4 @@ public class BlockOfText {
 	public char getLetter(int row, int column) {
 		return this.blockOfText.get(row).get(column);
 	}
-	
-	
 }
