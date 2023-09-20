@@ -20,7 +20,6 @@ class MaskTest {
 	@Test
 	void addTest() {
 		this.mask.add(0, 0);
-		
 		assertEquals(2, this.mask.getSize());
 		assertTrue(this.mask.getMask().contains(new Index(0, 0)));
 	}
@@ -31,6 +30,14 @@ class MaskTest {
 		String ecnryptedBlock = "abcd";
 		String decryptedBlock = "abdc";
 		assertEquals(decryptedBlock, this.mask.decryptBlock(ecnryptedBlock));
+	}
+	
+	@Test
+	void encryptBlockTest() {
+		this.mask.add(0, 0);
+		String decryptedBlock = "abdc";
+		String ecnryptedBlock = "abcd";
+		assertEquals(ecnryptedBlock, this.mask.encryptBlock(decryptedBlock));
 	}
 	
 
