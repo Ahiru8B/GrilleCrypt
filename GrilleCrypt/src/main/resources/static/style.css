@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+main {
+	max-width: 1000px;
+	margin: auto;
+}
+
+button {
+	min-width: 30px;
+	min-height: 30px;
+}
