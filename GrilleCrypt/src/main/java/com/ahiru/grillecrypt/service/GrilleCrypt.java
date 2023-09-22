@@ -20,6 +20,14 @@ public class GrilleCrypt {
 		this.mask.add(row, column);
 	}
 	
+	public void deleteElementInMask(int row, int column) {
+		this.mask.delete(row, column);
+	}
+	
+	public List<Index> getActiveIndexes() {
+		return this.mask.getActiveIndexes();
+	}
+	
 	public List<Index> getFreeIndexes() {
 		return this.mask.getFreeIndexes();
 	}

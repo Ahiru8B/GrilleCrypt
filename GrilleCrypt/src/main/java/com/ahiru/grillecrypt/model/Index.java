@@ -48,6 +48,10 @@ public class Index {
 		Index other = (Index) obj;
 		return column == other.column && row == other.row;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Index [row=" + row + ", column=" + column + "]";
+	}
 	
 }

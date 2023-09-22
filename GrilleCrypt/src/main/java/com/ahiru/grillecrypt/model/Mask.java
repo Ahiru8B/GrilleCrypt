@@ -26,6 +26,14 @@ public class Mask {
 	public void add(int row, int column) {
 		this.mask.add(new Index(row, column));
 	}
+	
+	public List<Index> getActiveIndexes() {
+		return new ArrayList<Index>(this.mask);
+	}
+	
+	public void delete(int row, int column) {
+		this.mask.remove(new Index(row, column));
+	}
 
 	public String encryptBlock(String message) {
 		Map<Integer, Map<Integer, Character>> blockOfText = new HashMap<Integer, Map<Integer,Character>>();

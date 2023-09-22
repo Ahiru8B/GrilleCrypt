@@ -13,6 +13,7 @@
 <body>
 	<main>
 		<select class="form-select selectMatixOptions" aria-label="MatrixSize">
+			<option selected>Выберите размер ключа: </option>
 			<option value="2">2х2</option>
 			<option value="4">4х4</option>
 			<option value="6">6х6</option>
@@ -20,21 +21,15 @@
 			<option value="10">10х10</option>
 		</select>
 		<div id="matrix">
-			<div>
-				<button type="button" class="btn btn-secondary"></button>
-				<button type="button" class="btn btn-secondary" disabled></button>
-			</div>
-			<div>
-				<button type="button" class="btn btn-secondary"></button>
-				<button type="button" class="btn btn-secondary" disabled></button>
-			</div>
+			
 		</div>
 		<div class="mb-3">
 			<label for="messageTextArea" class="form-label">Исходный текст</label>
 			<textarea class="form-control" id="messageTextArea" rows="3"></textarea>
 		</div>
 
-		<input class="btn btn-primary" type="submit" value="Submit">
+		<input class="btn btn-primary" id="encrypt" type="submit" value="Зашифровать">
+		<input class="btn btn-primary" id="decrypt" type="submit" value="Расшифровать">
 
 		<div class="mb-3">
 			<label for="outputMessage" class="form-label">Зашифрованный текст</label>
