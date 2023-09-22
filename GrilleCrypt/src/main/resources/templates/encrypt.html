@@ -13,20 +13,21 @@
 <body>
 	<main>
 		<select class="form-select selectMatixOptions" aria-label="MatrixSize">
-			<option selected>Выберите размер матрицы</option>
 			<option value="2">2х2</option>
 			<option value="4">4х4</option>
 			<option value="6">6х6</option>
 			<option value="8">8х8</option>
 			<option value="10">10х10</option>
 		</select>
-		<div>
-			<button type="button" class="btn btn-secondary"></button>
-			<button type="button" class="btn btn-secondary" disabled></button>
-		</div>
-		<div>
-			<button type="button" class="btn btn-secondary"></button>
-			<button type="button" class="btn btn-secondary" disabled></button>
+		<div id="matrix">
+			<div>
+				<button type="button" class="btn btn-secondary"></button>
+				<button type="button" class="btn btn-secondary" disabled></button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-secondary"></button>
+				<button type="button" class="btn btn-secondary" disabled></button>
+			</div>
 		</div>
 		<div class="mb-3">
 			<label for="messageTextArea" class="form-label">Исходный текст</label>
