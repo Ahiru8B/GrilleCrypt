@@ -1,6 +1,8 @@
 package com.ahiru.grillecrypt.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
+
+import javax.swing.text.TableView.TableRow;
 
 public class Mask {
 	private Set<Index> mask;
@@ -15,7 +20,7 @@ public class Mask {
 
 	public Mask(int size) {
 		super();
-		this.mask = new HashSet<Index>();
+		this.mask = new TreeSet<Index>();
 		this.size = size;
 	}
 
@@ -106,6 +111,7 @@ public class Mask {
 	
 	private List<Index> normalMask() {
 		List<Index> mask = new ArrayList<Index>(this.mask);
+		Collections.sort(mask);
 		return mask;
 	}
 
@@ -115,17 +121,22 @@ public class Mask {
 			Index index = mask.next();
 			rotatedMask.add(new Index(index.getColumn(), this.size - 1 - index.getRow()));
 		}
+		Collections.sort(rotatedMask);
 		return rotatedMask;
 	}
 	
 	private List<Index> maskRotated180degrees(Iterator<Index> mask) {
 		List<Index> rotated90degrees = this.maskRotated90degrees(mask);
-		return this.maskRotated90degrees(rotated90degrees.iterator());
+		List<Index> rotatedMask = this.maskRotated90degrees(rotated90degrees.iterator());
+		Collections.sort(rotatedMask);
+		return rotatedMask;
 	}
 	
 	private List<Index> maskRotated270degrees(Iterator<Index> mask) {
 		List<Index> rotated180degrees = this.maskRotated180degrees(mask);
-		return this.maskRotated90degrees(rotated180degrees.iterator());
+		List<Index> rotatedMask = this.maskRotated90degrees(rotated180degrees.iterator());
+		Collections.sort(rotatedMask);
+		return rotatedMask;
 	}
 	
 	private void setTextUnderMask(Map<Integer, Map<Integer, Character>> block, String message, Iterator<Index> mask) {
@@ -133,6 +144,7 @@ public class Mask {
 		while(mask.hasNext()) {
 			Index index = mask.next();
 			block.get(index.getRow()).put(index.getColumn(), message.charAt(i));
+			i++;
 		}
 	}
 	

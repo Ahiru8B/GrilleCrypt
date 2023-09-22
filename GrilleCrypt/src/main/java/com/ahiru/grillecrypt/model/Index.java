@@ -2,7 +2,7 @@ package com.ahiru.grillecrypt.model;
 
 import java.util.Objects;
 
-public class Index {
+public class Index implements Comparable<Index>{
 	private int row;
 	private int column;
 	
@@ -52,6 +52,23 @@ public class Index {
 	@Override
 	public String toString() {
 		return "Index [row=" + row + ", column=" + column + "]";
+	}
+
+	@Override
+	public int compareTo(Index arg0) {
+		if(this.row > arg0.row) {
+			return 1;
+		} else if(this.row < arg0.row) {
+			return -1;
+		} else {
+			if(this.column > arg0.column) {
+				return 1;
+			} else if(this.column < arg0.column) {
+				return -1;
+			} else {
+				return 0;
+			}
+		}
 	}
 	
 }

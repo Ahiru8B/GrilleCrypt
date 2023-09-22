@@ -24,4 +24,6 @@ class BlockOfTextTest {
 		assertEquals('c', this.blockOfText.getLetter(1, 0));
 		assertEquals('d', this.blockOfText.getLetter(1, 1));
 	}
+	
+	
 }
