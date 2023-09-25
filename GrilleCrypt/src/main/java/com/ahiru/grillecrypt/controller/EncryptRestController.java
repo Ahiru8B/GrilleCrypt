@@ -26,47 +26,47 @@ public class EncryptRestController {
 	
 	@GetMapping("/setSize/{size}")
 	public void setSize(@PathVariable Integer size) {
-		log.info("setSize size = {}", size);
+		log.info("Запросили установку размера блока. Размер блока = {}", size);
 		this.grilleCrypt.setSize(size);
 	}
 	
 	@GetMapping("/getFreeIndex")
 	public List<Index> getFreeIndex() {
-		log.info("free index = {}", this.grilleCrypt.getFreeIndexes());
+		log.info("Запросили список индексов, которые можно заполнить. free index = {}", this.grilleCrypt.getFreeIndexes());
 		return this.grilleCrypt.getFreeIndexes();
 	}
 	
 	@GetMapping("/getActive")
 	public List<Index> getActive() {
-		log.info("getActive = {}", this.grilleCrypt.getActiveIndexes());
+		log.info("Запросили список индексов открытых ячеек в маске. Список ячеек = {}", this.grilleCrypt.getActiveIndexes());
 		return this.grilleCrypt.getActiveIndexes();
 	}
 	
 	@GetMapping("/encrypt/{text}")
 	public String encrypt(@PathVariable String text) {
-		log.info("encrypt text = {}", text);
+		log.info("Запросили зашифровку текста!");
 		String encryptedText = this.grilleCrypt.encrypt(text);
-		log.info("encrypted text = {}", encryptedText);
+		log.info("Зашифрованный текст = {}", encryptedText);
 		return encryptedText;
 	}
 	
 	@GetMapping("/decrypt/{text}")
 	public String decrypt(@PathVariable String text) {
-		log.info("encrypt text = {}", text);
+		log.info("Запросили расшифровку текста!");
 		String decryptedText = this.grilleCrypt.decrypt(text);
-		log.info("encrypted text = {}", decryptedText);
+		log.info("Расшифрованный текст = {}", decryptedText);
 		return decryptedText;
 	}
 	
 	@PostMapping("/addIndex")
 	public void addIndex(@RequestBody Index index) {
-		log.info("add index! row = {}, column = {}", index.getRow(), index.getColumn());
+		log.info("Попытались добавить элемент в маску с координатами: Строка = {}, Столбец = {}", index.getRow(), index.getColumn());
 		this.grilleCrypt.addElementInMask(index.getRow(), index.getColumn());
 	}
 	
 	@DeleteMapping("/deleteIndex")
 	public void deleteIndex(@RequestBody Index index) {
-		log.info("add index! row = {}, column = {}", index.getRow(), index.getColumn());
+		log.info("Попытались удалить элемент из маски с координатами: Строка = {}, Столбец = {}", index.getRow(), index.getColumn());
 		this.grilleCrypt.deleteElementInMask(index.getRow(), index.getColumn());
 	}
 }
