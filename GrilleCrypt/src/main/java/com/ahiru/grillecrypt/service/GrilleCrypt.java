@@ -45,7 +45,8 @@ public class GrilleCrypt {
 		for(int i = 0; i < countOfBlocks; i++) {
 			decrypted.append(
 					this.mask.decryptBlock(
-							stringMessage.substring(i * countElementsInBlock, (i + 1) * countElementsInBlock)));
+							stringMessage.substring(i * countElementsInBlock,
+									(i + 1) * countElementsInBlock)));
 		}
 		
 		return decrypted.toString();
@@ -55,17 +56,22 @@ public class GrilleCrypt {
 		StringBuilder encrypted = new StringBuilder();
 		StringBuilder stringMessage = new StringBuilder(message);
 		Random random = new Random();
+		int countLetterInAlphabet = 33;
+		char firstLetterInAlphabet = 'а';
+		
 		int countElementsInBlock = this.mask.getSize() * this.mask.getSize();
+		
 		while(stringMessage.length() % countElementsInBlock > 0) {
-			stringMessage.append((char) ('a' + random.nextInt(26)));
+			stringMessage.append((char) (firstLetterInAlphabet + random.nextInt(countLetterInAlphabet)));
 		}
+		
 		int countOfBlocks = stringMessage.length() / countElementsInBlock;
 		
 		for(int i = 0; i < countOfBlocks; i++) {
-			System.err.println("substring = " + stringMessage.substring(i * countElementsInBlock, (i + 1) * countElementsInBlock));
 			encrypted.append(
 					this.mask.encryptBlock(
-							stringMessage.substring(i * countElementsInBlock, (i + 1) * countElementsInBlock)));
+							stringMessage.substring(i * countElementsInBlock,
+									(i + 1) * countElementsInBlock)));
 		}
 		
 		return encrypted.toString();
