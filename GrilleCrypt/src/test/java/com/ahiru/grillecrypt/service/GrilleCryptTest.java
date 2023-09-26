@@ -34,4 +34,18 @@ class GrilleCryptTest {
 		assertEquals(encrypt, this.grileCrypt.decrypt(decrypt));	
 	}
 	
+	@Test
+	void serviceTest() {
+		String message = "Привет Мир!";
+		this.grileCrypt.setSize(4);
+		this.grileCrypt.addElementInMask(0, 0);
+		this.grileCrypt.addElementInMask(1, 1);
+		this.grileCrypt.addElementInMask(0, 2);
+		this.grileCrypt.addElementInMask(1, 3);
+		String encryptedText = this.grileCrypt.encrypt(message);
+		assertEquals(4 * 4, encryptedText.length());
+		String decryptedText = this.grileCrypt.decrypt(encryptedText);
+		assertEquals(message, decryptedText.substring(0, message.length()));
+	}
+
 }
