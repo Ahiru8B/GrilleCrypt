@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ahiru.grillecrypt.model.Index;
 import com.ahiru.grillecrypt.service.GrilleCrypt;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class EncryptRestController {
@@ -59,7 +61,7 @@ public class EncryptRestController {
 	}
 	
 	@PostMapping("/addIndex")
-	public void addIndex(@RequestBody Index index) {
+	public void addIndex(@Valid @RequestBody Index index) {
 		log.info("Попытались добавить элемент в маску с координатами: Строка = {}, Столбец = {}", index.getRow(), index.getColumn());
 		this.grilleCrypt.addElementInMask(index.getRow(), index.getColumn());
 	}

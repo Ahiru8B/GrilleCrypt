@@ -1,18 +1,14 @@
 package com.ahiru.grillecrypt.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.swing.text.TableView.TableRow;
 
 public class Mask {
 	private Set<Index> mask;
@@ -103,7 +99,6 @@ public class Mask {
 		while(!freeIndexes.isEmpty()) {
 			Random random = new Random();
 			int in = random.nextInt(freeIndexes.size());
-			System.err.println(in);
 			this.mask.add(freeIndexes.get(in));
 			freeIndexes = this.getFreeIndexes();
 		}

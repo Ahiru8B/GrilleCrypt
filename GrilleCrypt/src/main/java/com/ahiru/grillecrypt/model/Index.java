@@ -2,8 +2,12 @@ package com.ahiru.grillecrypt.model;
 
 import java.util.Objects;
 
+import jakarta.validation.constraints.Min;
+
 public class Index implements Comparable<Index>{
+	@Min(value = 0, message = "Номер строки должен быть положительным")
 	private int row;
+	@Min(value = 0, message = "Номер стобца должен быть положительным")
 	private int column;
 	
 	public Index() {
@@ -38,15 +42,15 @@ public class Index implements Comparable<Index>{
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object otherObject) {
+		if (this == otherObject)
 			return true;
-		if (obj == null)
+		if (otherObject == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != otherObject.getClass())
 			return false;
-		Index other = (Index) obj;
-		return column == other.column && row == other.row;
+		Index otherIndex = (Index) otherObject;
+		return column == otherIndex.column && row == otherIndex.row;
 	}
 
 	@Override
@@ -55,15 +59,15 @@ public class Index implements Comparable<Index>{
 	}
 
 	@Override
-	public int compareTo(Index arg0) {
-		if(this.row > arg0.row) {
+	public int compareTo(Index otherIndex) {
+		if(this.row > otherIndex.row) {
 			return 1;
-		} else if(this.row < arg0.row) {
+		} else if(this.row < otherIndex.row) {
 			return -1;
 		} else {
-			if(this.column > arg0.column) {
+			if(this.column > otherIndex.column) {
 				return 1;
-			} else if(this.column < arg0.column) {
+			} else if(this.column < otherIndex.column) {
 				return -1;
 			} else {
 				return 0;
