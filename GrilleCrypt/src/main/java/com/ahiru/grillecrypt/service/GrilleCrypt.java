@@ -45,8 +45,12 @@ public class GrilleCrypt {
 		return this.mask.isFree(row, column);
 	}
 	
-	public String decrypt(String cryptMessage) {
+	public String decrypt(String cryptMessage) throws ServiceException {
 		log.info("Попытка зашифровать сообщение!");
+		if(this.getFreeIndexes().size() > 0) {
+			log.error("Попытка расшифровать сообщение с не заполненым ключем");
+			throw new ServiceException("Не все элементы ключа установлены!");
+		}
 		StringBuilder decrypted = new StringBuilder();
 		StringBuilder stringMessage = new StringBuilder(cryptMessage);
 		int countElementsInBlock = this.mask.getSize() * this.mask.getSize();
@@ -61,8 +65,13 @@ public class GrilleCrypt {
 		return decrypted.toString();
 	}
 	
-	public String encrypt(String message) {
+	public String encrypt(String message) throws ServiceException {
 		log.info("Попытка расшифровать сообщение!");
+		if(this.getFreeIndexes().size() > 0) {
+			log.error("Попытка зашифровать сообщение с не заполненым ключем");
+			throw new ServiceException("Не все элементы ключа установлены!");
+		}
+		
 		StringBuilder encrypted = new StringBuilder();
 		StringBuilder stringMessage = new StringBuilder(message);
 		Random random = new Random();

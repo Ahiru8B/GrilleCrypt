@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ahiru.grillecrypt.model.Index;
 import com.ahiru.grillecrypt.service.GrilleCrypt;
+import com.ahiru.grillecrypt.service.ServiceException;
 
 import jakarta.validation.Valid;
 
@@ -47,7 +48,12 @@ public class EncryptRestController {
 	@GetMapping("/encrypt/{text}")
 	public String encrypt(@PathVariable String text) {
 		log.info("Запросили зашифровку текста!");
-		String encryptedText = this.grilleCrypt.encrypt(text);
+		String encryptedText = "";
+		try {
+			encryptedText = this.grilleCrypt.encrypt(text);
+		} catch (ServiceException e) {
+			log.error("Произошла непредвиденная ошибка! msg = {}", e.getMessage());
+		}
 		log.info("Зашифрованный текст = {}", encryptedText);
 		return encryptedText;
 	}
@@ -55,7 +61,12 @@ public class EncryptRestController {
 	@GetMapping("/decrypt/{text}")
 	public String decrypt(@PathVariable String text) {
 		log.info("Запросили расшифровку текста!");
-		String decryptedText = this.grilleCrypt.decrypt(text);
+		String decryptedText = "";
+		try {
+			decryptedText = this.grilleCrypt.decrypt(text);
+		} catch (ServiceException e) {
+			log.error("Произошла непредвиденная ошибка! msg = {}", e.getMessage());
+		}
 		log.info("Расшифрованный текст = {}", decryptedText);
 		return decryptedText;
 	}

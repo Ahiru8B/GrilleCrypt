@@ -19,23 +19,25 @@ class GrilleCryptTest {
 	}
 	
 	@Test
-	void encryptTest() {
+	void encryptTest() throws ServiceException {
 		String encrypt = "abcd";
 		String decrypt = "abdc";
 		this.grileCrypt.addElementInMask(0, 0);
-		assertEquals(decrypt, this.grileCrypt.encrypt(encrypt));
+		String message = this.grileCrypt.encrypt(encrypt);
+		assertEquals(decrypt, message);
 	}
 	
 	@Test
-	void decryptTest() {
+	void decryptTest() throws ServiceException {
 		String encrypt = "abcd";
 		String decrypt = "abdc";
 		this.grileCrypt.addElementInMask(0, 0);
-		assertEquals(encrypt, this.grileCrypt.decrypt(decrypt));	
+		String message = this.grileCrypt.decrypt(decrypt);
+		assertEquals(encrypt, message);	
 	}
 	
 	@Test
-	void serviceTest() {
+	void serviceTest() throws ServiceException {
 		String message = "Привет Мир!";
 		this.grileCrypt.setSize(4);
 		this.grileCrypt.addElementInMask(0, 0);
