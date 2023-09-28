@@ -22,16 +22,18 @@
 			<option value="10">10х10</option>
 		</select>
 		<div id="matrix">
-			
+
 		</div>
 		<div class="mb-3">
 			<label for="messageTextArea" class="form-label">Исходный текст</label>
 			<textarea class="form-control" id="messageTextArea" rows="3"></textarea>
 		</div>
 
-		<input class="btn btn-primary" id="encrypt" type="submit" value="Зашифровать">
-		<input class="btn btn-primary" id="decrypt" type="submit" value="Расшифровать">
-
+		<div class="encrypt-button">
+			<input class="btn btn-primary" id="encrypt" type="submit" value="Зашифровать">
+			<input class="btn btn-primary" id="decrypt" type="submit" value="Расшифровать">
+		</div>
+		
 		<div class="mb-3">
 			<label for="outputMessage" class="form-label">Зашифрованный текст</label>
 			<textarea class="form-control" id="outputMessage" rows="3"></textarea>

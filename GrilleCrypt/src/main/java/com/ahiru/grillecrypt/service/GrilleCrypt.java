@@ -47,7 +47,7 @@ public class GrilleCrypt {
 	
 	public String decrypt(String cryptMessage) throws ServiceException {
 		log.info("Попытка зашифровать сообщение!");
-		if(this.getFreeIndexes().size() > 0) {
+		if(this.mask == null || this.getFreeIndexes().size() > 0) {
 			log.error("Попытка расшифровать сообщение с не заполненым ключем");
 			throw new ServiceException("Не все элементы ключа установлены!");
 		}
@@ -67,7 +67,7 @@ public class GrilleCrypt {
 	
 	public String encrypt(String message) throws ServiceException {
 		log.info("Попытка расшифровать сообщение!");
-		if(this.getFreeIndexes().size() > 0) {
+		if(this.mask == null || this.getFreeIndexes().size() > 0) {
 			log.error("Попытка зашифровать сообщение с не заполненым ключем");
 			throw new ServiceException("Не все элементы ключа установлены!");
 		}

@@ -1,36 +1,46 @@
 $(document).ready(() => {
 	let size;
+
 	$('select').on('change', function(e) {
-
-		$("body").on("click", ".matrix-button", function() {
-			matrixClick($(this));
-		})
-
-		$("body").on("click", "#encrypt", function() {
-			encrypt();
-		})
-
-		$("body").on("click", "#decrypt", function() {
-			decrypt();
-		})
-		
+		errorRemove();
 		size = this.value;
 		$.ajax({
 			url: "./api/setSize/" + size,
 			type: 'GET',
+			async: false,
 			success: function(res) {
 				drawMatrix(size);
 			}
 		});
+
+		$("body").on("click", ".matrix-button", function() {
+			matrixClick($(this));
+		})
 	});
+
+	$("body").on("click", "#encrypt", function() {
+		encrypt();
+	})
+
+	$("body").on("click", "#decrypt", function() {
+		decrypt();
+	})
+
+
 
 	function decrypt() {
 		let text = $("#messageTextArea").val();
 		$.ajax({
 			url: "./api/decrypt/" + text,
 			type: 'GET',
+			async: false,
 			success: function(res) {
 				$("#outputMessage").val(res);
+			},
+			error: function encryptError (e) {
+				console.log(e["responseJSON"]["message"]);
+				errorRemove();
+				$(".encrypt-button").prepend("<div class='error alert alert-danger' role='alert'>" + e["responseJSON"]["message"] + "</div>");
 			}
 		});
 	}
@@ -40,27 +50,35 @@ $(document).ready(() => {
 		$.ajax({
 			url: "./api/encrypt/" + text,
 			type: 'GET',
+			async: false,
 			success: function(res) {
 				$("#outputMessage").val(res);
+				console.log(res);
+			},
+			error: function encryptError (e) {
+				console.log(e["responseJSON"]["message"]);
+				errorRemove();
+				$(".encrypt-button").prepend("<div class='error alert alert-danger' role='alert'>" + e["responseJSON"]["message"] + "</div>");
 			}
 		});
 	}
 
 
 	function matrixClick(button) {
+		errorRemove();
+		
 		let id = button.attr("id");
 		let index = {}
 		index["row"] = id.split("-")[0];
 		index["column"] = id.split("-")[1];
-
-
-		console.log(index);
+		
 		if (button.hasClass("passive")) {
 			$.ajax({
 				url: '/api/addIndex',
 				contentType: "application/json",
 				method: 'post',
 				dataType: 'json',
+				async: false,
 				data: JSON.stringify(index),
 				success: function(data) {
 					alert(data);
@@ -73,6 +91,7 @@ $(document).ready(() => {
 				contentType: "application/json",
 				method: 'delete',
 				dataType: 'json',
+				async: false,
 				data: JSON.stringify(index),
 				success: function(data) {
 					alert(data);
@@ -100,12 +119,11 @@ $(document).ready(() => {
 		$.ajax({
 			url: "./api/getFreeIndex",
 			type: 'GET',
+			async: false,
 			success: function(free) {
 				for (let i = 0; i < free.length; i++) {
 					id = free[i]["row"] + "-" + free[i]["column"];
 					$("#" + id).prop('disabled', false);
-					//$("#" + id).removeClass("btn-secondary");
-					//					$("#" + id).addClass("btn-primary");
 					$("#" + id).addClass("passive");
 				}
 			}
@@ -126,5 +144,9 @@ $(document).ready(() => {
 				}
 			}
 		});
+	}
+	
+	function errorRemove() {
+		$(".error").remove();
 	}
 });
